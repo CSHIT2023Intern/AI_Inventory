@@ -18,8 +18,21 @@
         </div>
 
         <div style="display:flex;width:100%;align-items:center;justify-content:center;margin-top:30px;">
-            <p style="font-weight:900;font-size:30px;">數量:{{num}}</p>
+            <p style="font-weight:900;font-size:30px;">
+                {% for class_name, count in class_counts.items %}
+                    {% if class_name == 'p1' %}
+                        {{ 'vial' }}: {{ count }} 個{% if not forloop.last %}, {% endif %}
+                    {% else %}
+                        {{ 'Ampoule' }}: {{ count }} 個{% if not forloop.last %}, {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+                <!-- {% for class_name, count in class_counts.items %}
+                    {{ class_name }}: {{ count }} 個{% if not forloop.last %}, {% endif %}
+                {% endfor %}> -->
+            </p>
         </div>
+
     </div>
 
     <footer style="position:fixed;bottom:0;background-color:#3f7aad;width:100%;">

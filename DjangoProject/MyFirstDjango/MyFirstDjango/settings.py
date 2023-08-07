@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+import sys
+sys.path.insert(0, 'C:/Users/user/Desktop/中山醫醫資/大三下/實習/112_intern/AI_Inventory/DjangoProject/MyFirstDjango/MyFirstDjango/models')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
