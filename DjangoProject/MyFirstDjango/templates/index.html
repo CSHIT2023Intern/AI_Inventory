@@ -31,7 +31,7 @@
             <div class="camera_area">
                 <video autoplay playsinline id="camera"></video>
             </div>
-            <form id="image"  enctype="multipart/form-data" action="/FinalAns/" method="POST">
+            <!-- <form id="image"  enctype="multipart/form-data" action="/FinalAns/" method="POST">
                 <div style="display:flex;width:100%;align-items:center;justify-content:center;margin-top:30px;">
                     <div id="shoot">
                         <i class="fa-solid fa-camera"></i>
@@ -42,12 +42,25 @@
                         <input id="file" name="file" type="file" accept="image/png, image/jpeg;">
                     </div>
                 </div>
+            </form> -->
+            <form id="image"  enctype="multipart/form-data" action="/FinalAns/" method="POST">
+                <div style="display:flex;width:100%;align-items:center;justify-content:center;margin-top:30px;">
+                    <div id="shoot" style="text-align:center;border:3px solid black;border-radius:50px;width:50px;height:50px;margin:20px;">
+                        <i class="fa-solid fa-camera" style="font-size:23px;height:50px;line-height:50px;"></i>
+                    </div>
+                    <div id="choose_img" style="text-align:center;border:3px solid black;border-radius:50px;width:50px;height:50px;margin:20px;position: relative;">
+                        <i class="fa-solid fa-file-image" style="font-size:23px;height:50px;line-height:50px;"></i>
+                        <input type="hidden" id="base64_file" name="base64_file" value>
+                        <input id="file" name="file" type="file" accept="image/png, image/jpeg" style="opacity:0;width:46px;height:46px;curser:pointer;position:absolute;top:2px;left:2px;border-radius:50px;">
+                    </div>
+    
+                </div>
             </form>
         </div>
         <footer class="footer">
             <p>Copyright &copy; 2023 Information Department of Chung Shan Medical University Hospital. All rights reserved.</p>
         </footer>
-        <!-- <div class="hidden_block">
+        <div class="hidden_block">
             <div id="result">
                 <div class="" style="display:flex;align-items:center;text-align: center;justify-content: center;">
                     <div id="back" class="btn" style="background-color:#d90000">
@@ -58,7 +71,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </body>
 </html>
 
