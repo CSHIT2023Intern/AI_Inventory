@@ -21,7 +21,7 @@ a=detectapi(weights='static/07211657_best.pt')
 
 def index(request):
     context={}
-    context["name"] = "aaa"
+    context["name"] = "中山附醫藥品數量辨識系統"
     return render(request, "index.html", context)
 
 def carema(request):
