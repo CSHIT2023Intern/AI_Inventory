@@ -33,17 +33,12 @@ link[rel="icon"] {
 }
 
 .fancy-text {
-    font-family: '標楷體', sans-serif; /* 使用 Google Fonts 中的 Montserrat 字體 */
+    font-family: '標楷體'; /* 使用 Google Fonts 中的 Montserrat 字體 */
     font-size: 30px; /* 調整字體大小 */
     font-weight: 900;
-    line-height: 1.2; /* 調整行距 */
+    /* line-height: 1.2; 調整行距 */
     color: white;
     text-shadow: 32px 15px 6px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(to right, rgb(47, 20, 31) 30%, #3a3f43 70%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: white; /* 將文字顏色設置為白色 */
-    color: white; /* 保留一個額外的 color 屬性，以確保跨瀏覽器兼容性 */
 }
 
 nav ul {
@@ -65,9 +60,7 @@ nav a {
 }
 
 .header {
-    width: 94%;
-    max-width: 1600px;
-    height: 100px;
+    width: 100%;
     background-image: linear-gradient(to bottom right, #c5d5e4, #2f5588);
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -80,19 +73,15 @@ nav a {
 .header-logo {
     display: flex;
     align-items: center;
+    width: 80%; /* 調整寬度，或者指定固定的寬度 */
 }
+
 
 .logo {
     width: 30%;
     max-width: 100px;
     height: auto;
     margin-right: 3%;
-}
-
-.header-text {
-    font-size: 20px;
-    display: flex;
-    align-items: center;
 }
 
 .nav-list {
