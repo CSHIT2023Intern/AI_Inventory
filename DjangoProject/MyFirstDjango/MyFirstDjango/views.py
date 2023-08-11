@@ -7,7 +7,6 @@ sys.path.insert(0, 'C:/Users/user/Desktop/中山醫醫資/大三下/實習/112_i
 print(sys.path)
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 #from .models.experimental import attempt_load
-#from .detect import detectapi
 from .detect import detectapi
 import cv2
 import numpy as np
@@ -28,6 +27,11 @@ def carema(request):
     context={}
     context["name"] = "bbb"
     return render(request, "carema.html", context)
+
+def instructions(request):
+    context={}
+    context["name"] = "中山附醫藥品數量辨識系統"
+    return render(request, "instructions.html", context)
 
 def FinalAns(request):
     context = {}

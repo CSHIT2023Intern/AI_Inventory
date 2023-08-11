@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/instructions.css' %}">
+    <link rel="icon" href="{% static 'image/drugIcon.png' %}" type="image/x-icon">
+</head>
+<body>
+    <header class="header">
+        <div class="header-logo">
+            <img src="{% static 'image/cshlogo.png' %}" alt="Logo" style="width: 30%; max-width: 100px; height: auto; margin-right: 3%;">
+            <p class="fancy-text header-text">中山附醫藥品辨識系統</p>
+        </div>
+        <nav>
+            <ul class="nav-list">
+                <li><a href="/index/">首頁</a></li>
+                <li><a href="/instructions/#">操作說明</a></li>
+                <li><a href="#">關於我們</a></li>
+            </ul>
+        </nav>              
+    </header>
+    <div class="container">
+        <h2>歡迎使用中山附醫藥品辨識系統！</h2>
+        <p>這個操作說明將指導您如何使用我們的藥品辨識系統來識別藥品。</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h3>進入系統</h3>
+                    <p>在您的瀏覽器中輸入系統網址（例如：http://OOO.com），進入藥品辨識系統。</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h3>拍照&上傳圖片</h3>
+                    <p>方式1:點擊「拍照」按鈕，請將藥品畫面對準紅色框框，按下「拍照」按鈕即可。</p>
+                    <p>方式2:點擊「上傳圖片」按鈕，選擇要辨識的藥品圖片並上傳。</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h3>等待辨識</h3>
+                    <p>系統將開始進行藥品辨識，請耐心等待。辨識結果將在畫面上顯示。</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <h3>查看結果</h3>
+                    <p>您將能夠看到藥品的名稱、描述以及可能的注意事項。如有需要，您還可以點擊相關鏈接以獲取更多資訊。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>Copyright &copy; 2023 Information Department of Chung Shan Medical University Hospital. All rights reserved.</p>
+    </footer>
+</body>
+</html>

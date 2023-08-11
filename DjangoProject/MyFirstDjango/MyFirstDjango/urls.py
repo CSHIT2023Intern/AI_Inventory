@@ -21,4 +21,5 @@ urlpatterns = [
     path('index/', views.index),
     path('camera/', views.carema),
     path('FinalAns/', views.FinalAns),
+    path('instructions/', views.instructions),
 ]
