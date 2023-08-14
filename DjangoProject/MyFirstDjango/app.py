@@ -3,8 +3,12 @@ from fastapi import FastAPI, UploadFile, File
 from typing import List
 import torch
 import cv2
+import base64
 import numpy as np
+from io import BytesIO
+from PIL import Image
 import random
+from pydantic import BaseModel
 import sys
 sys.path.insert(0, 'C:/Users/user/Desktop/中山醫醫資/大三下/實習/112_intern/AI_Inventory/DjangoProject/MyFirstDjango/MyFirstDjango')
 # 导入你的自定义模块
@@ -124,35 +128,43 @@ class detectapi:
                     plot_one_box(xyxy, im0, label=label, color=self.colors[int(cls)], line_thickness=3)
             result.append((im0, result_txt))  # 对于每张图片，返回画完框的图片，以及该图片的标签列表。
         return result, len(result_txt)
-    
+
+class ImageData(BaseModel):
+    image_data: str
+
 @app.post("/detect/")
-async def detect_objects(files: List[UploadFile]):
+async def detect_objects(files: List[UploadFile], image_data: ImageData):  # 使用 ImageData 类型
     results = []
 
-    for file in files:
-        contents = await file.read()
-        image = cv2.imdecode(np.frombuffer(contents, np.uint8), cv2.IMREAD_COLOR)
-        
-        detector = detectapi(weights='static/07211657_best.pt', img_size=640)
-        detection_results, _ = detector.detect([image])
-        
-        vial_count = 0
-        ampoule_count = 0
-        for _, result_txt in detection_results:
-            for cls, _, _ in result_txt:
-                if cls == 0:  # Vial
-                    vial_count += 1
-                elif cls == 1:  # Ampoule
-                    ampoule_count += 1
-        
-        result = {
-            "vial_count": vial_count,
-            "ampoule_count": ampoule_count,
-            "total_count": vial_count + ampoule_count
-        }
-        results.append(result)
-    
+    if image_data.image_data.startswith("data:image"):
+        # Decode the Base64 image and convert it to NumPy array
+        base64_data = re.sub('^data:image/.+;base64,', '', image_data.image_data)
+        byte_data = base64.b64decode(base64_data)
+        image = cv2.imdecode(np.frombuffer(byte_data, np.uint8), cv2.IMREAD_COLOR)
+    else:
+        raise ValueError("Invalid image_data format")
+
+    detector = detectapi(weights='static/07211657_best.pt', img_size=640)
+    detection_results, _ = detector.detect([image])
+
+    vial_count = 0
+    ampoule_count = 0
+    for _, result_txt in detection_results:
+        for cls, _, _ in result_txt:
+            if cls == 0:  # Vial
+                vial_count += 1
+            elif cls == 1:  # Ampoule
+                ampoule_count += 1
+
+    result = {
+        "vial_count": vial_count,
+        "ampoule_count": ampoule_count,
+        "total_count": vial_count + ampoule_count,
+    }
+    results.append(result)
+
     return results
+
 
 # 原来的命令行参数解析改为 FastAPI 的方式
 # 这里你可能需要根据需要调整参数的默认值或者将一些参数设置为可选
