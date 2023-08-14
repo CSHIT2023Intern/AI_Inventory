@@ -144,3 +144,48 @@ nav a {
     margin-top: 10px;
     font-size: smaller;
 }
+
+@media (max-width:420px){
+    .header{
+        display: block;
+    }
+    .header-logo{
+        width:100%
+    }
+    .camera_area{
+        width:85%;
+        padding-bottom: 350px;
+    }
+    .fancy-text{
+        font-size: 25px;
+    }
+    .nav-list{
+        padding-top: 0;
+        justify-content: end ;
+    }
+    #shoot{
+        margin-left: 25px;
+    }
+}
+@media (max-width:380px){
+    .header{
+        display: block;
+    }
+    .header-logo{
+        width:100%
+    }
+    .camera_area{
+        width:85%;
+        padding-bottom: 200px;
+    }
+    .fancy-text{
+        font-size: 24px;
+    }
+    .nav-list{
+        padding-top: 0;
+        justify-content: end;
+    }
+    #shoot{
+        margin-left: 25px;
+    }
+}
