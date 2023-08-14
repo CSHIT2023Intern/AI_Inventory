@@ -1,17 +1,27 @@
 from django.shortcuts import render
 from PIL import Image
-from .detect import detectapi
 import sys
-sys.path.insert(0, '/Users/User/Desktop/MyFirstDjango')
+import os
+sys.path.insert(0, 'D:/intern/AI_Inventory/DjangoProject/MyFirstDjango/MyFirstDjango')
+print(sys.path)
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from models.experimental import attempt_load
+# from MyFirstDjango.detect import detectapi
+from detect import detectapi
+
+from io import BytesIO
+from collections import Counter
+from collections import defaultdict
 import cv2
 import numpy as np
-from io import BytesIO
 import base64
 import re
+
 a=detectapi(weights='static/20220817.pt')
+
 def index(request):
     context={}
-    context["name"] = "aaa"
+    context["name"] = "中山附醫藥品數量辨識系統"
     return render(request, "index.html", context)
 
 def carema(request):
@@ -25,7 +35,7 @@ def FinalAns(request):
         return render(request, "FinalAns.html")
     elif request.method == "POST":
 
-        if request.POST.get('base64_file')!="":
+        if request.POST.get('base64_file') != "":
             files = request.POST.get('base64_file')
             base64_data = re.sub('^data:image/.+;base64,', '', files)
             byte_data = base64.b64decode(base64_data)
@@ -37,13 +47,29 @@ def FinalAns(request):
             img = Image.open(files.file)
 
         img = cv2.cvtColor(np.asarray(img), cv2.COLOR_RGB2BGR)
-        result,num=a.detect([img])
+
+        # Create an instance of the detectapi class
+        #a = detectapi(weights='path/to/weights.pth', img_size=640)  # Replace with actual weights path
+
+        # Call the detect method to get the result and number of detected objects
+        result, num = a.detect([img])
+
+        # Get the detected class name for each detected object and ignore the confidence values
+        class_counts = {}
+
+        for _, result_txt in result:
+            for class_index, _,_ in result_txt:
+                class_name = a.names[class_index]
+                class_counts[class_name] = class_counts.get(class_name, 0) + 1
+
         finalImg = Image.fromarray(result[0][0])
 
-        base64_img=image_to_base64(finalImg)
+        base64_img = image_to_base64(finalImg)
         context["img"] = base64_img
         context["name"] = "FN"
         context["num"] = num
+        context["class_counts"] = class_counts
+
         return render(request, "FinalAns.html", context)
 
 

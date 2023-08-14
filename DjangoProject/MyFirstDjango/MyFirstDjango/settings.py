@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+import sys
+sys.path.insert(0, 'D:/intern/AI_Inventory/DjangoProject/MyFirstDjango/MyFirstDjango/models')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -122,7 +124,8 @@ HERE=os.path.join(HERE,'../')
 STATICFILES_DIRS = (
     os.path.join(HERE, 'static'),
 )
-
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
