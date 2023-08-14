@@ -1,10 +1,12 @@
+import argparse
 from fastapi import FastAPI, UploadFile, File
 from typing import List
 import torch
 import cv2
 import numpy as np
 import random
-
+import sys
+sys.path.insert(0, 'C:/Users/user/Desktop/中山醫醫資/大三下/實習/112_intern/AI_Inventory/DjangoProject/MyFirstDjango/MyFirstDjango')
 # 导入你的自定义模块
 from MyFirstDjango.models.experimental import attempt_load
 from MyFirstDjango.utils.datasets import MyLoadImages
