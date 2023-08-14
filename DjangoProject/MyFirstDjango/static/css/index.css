@@ -1,5 +1,5 @@
  /* 通用的樣式 */
-.content {
+ .content {
     margin-top: 40px;
 }
 
@@ -26,74 +26,6 @@
     /* background-color: #746984; 加入區域背景顏色 */
 }
 
-/* 在螢幕寬度小於 768px 時的樣式調整（手機和平板） */
-@media (max-width: 768px) {
-    .camera_area {
-        width: 100%; /* 調整寬度適應手機和平板螢幕 */
-        padding: 10px; /* 調整 padding 值以適應螢幕尺寸 */
-        background-size: 2px 16px, 16px 2px, 2px 16px, 16px 2px; /* 調整背景線條尺寸 */
-    }
-
-    #camera {
-        width: 100%; /* 調整寬度適應手機和平板螢幕 */
-    }
-}
-
-/* 在螢幕寬度小於 820px 時的樣式調整（手機和平板） */
-@media (max-width: 820px) {
-    .camera_area {
-        width: 87%; /* 調整寬度適應手機和平板螢幕 */
-        padding: 10px; /* 調整 padding 值以適應螢幕尺寸 */
-        padding-bottom: 500px;
-        background-size: 2px 16px, 16px 2px, 2px 16px, 16px 2px; /* 調整背景線條尺寸 */
-    }
-
-    #camera {
-        width: 100%; /* 調整寬度適應手機和平板螢幕 */
-    }
-}
-
-/* 在螢幕寬度小於 768px 時的樣式調整（手機和平板） */
-@media (max-width: 768px) {
-    .camera_area {
-        width: 87%; /* 調整寬度適應手機和平板螢幕 */
-        padding: 10px; /* 調整 padding 值以適應螢幕尺寸 */
-        padding-bottom: 375px;
-        background-size: 2px 16px, 16px 2px, 2px 16px, 16px 2px; /* 調整背景線條尺寸 */
-    }
-
-    #camera {
-        width: 100%; /* 調整寬度適應手機和平板螢幕 */
-    }
-}
-
-/* 在螢幕寬度小於 912px 時的樣式調整（手機和平板） */
-@media (max-width: 912px) {
-    .camera_area {
-        width: 85%; /* 調整寬度適應手機和平板螢幕 */
-        padding: 10px; /* 調整 padding 值以適應螢幕尺寸 */
-        padding-bottom: 400px;
-        background-size: 2px 16px, 16px 2px, 2px 16px, 16px 2px; /* 調整背景線條尺寸 */
-    }
-
-    #camera {
-        width: 100%; /* 調整寬度適應手機和平板螢幕 */
-    }
-}
-
-/* 在螢幕寬度小於 540px 時的樣式調整（手機和平板） */
-@media (max-width: 540px) {
-    .camera_area {
-        width: 82%; /* 調整寬度適應手機和平板螢幕 */
-        padding: 10px; /* 調整 padding 值以適應螢幕尺寸 */
-        padding-bottom: 170px;
-        background-size: 2px 16px, 16px 2px, 2px 16px, 16px 2px; /* 調整背景線條尺寸 */
-    }
-
-    #camera {
-        width: 100%; /* 調整寬度適應手機和平板螢幕 */
-    }
-}
 
 link[rel="icon"] {
     width: 32px;
@@ -107,7 +39,6 @@ link[rel="icon"] {
     /* line-height: 1.2; 調整行距 */
     color: white;
     text-shadow: 32px 15px 6px rgba(0, 0, 0, 0.2);
-    white-space: nowrap;
 }
 
 nav ul {
@@ -126,7 +57,6 @@ nav a {
     font-family: '標楷體', sans-serif; /* 使用 Google Fonts 中的 Montserrat 字體 */
     color: white;
     text-decoration: none;
-    white-space: nowrap;
 }
 
 .header {
@@ -213,4 +143,118 @@ nav a {
     color: white;
     margin-top: 10px;
     font-size: smaller;
+}
+
+@media (max-width:420px){
+    .header{
+        display: block;
+    }
+    .header-logo{
+        width:100%
+    }
+    .camera_area{
+        width:85%;
+        padding-bottom: 350px;
+    }
+    .fancy-text{
+        font-size: 25px;
+    }
+    .nav-list{
+        padding-top: 0;
+        justify-content: end ;
+    }
+    #shoot{
+        margin-left: 25px;
+    }
+}
+@media (max-width:380px){
+    .header{
+        display: block;
+    }
+    .header-logo{
+        width:100%
+    }
+    .camera_area{
+        width:85%;
+        padding-bottom: 200px;
+    }
+    .fancy-text{
+        font-size: 24px;
+    }
+    .nav-list{
+        padding-top: 0;
+        justify-content: end;
+    }
+    #shoot{
+        margin-left: 25px;
+    }
+}
+
+/* 在螢幕寬度小於 768px 時的樣式調整（手機和平板） */
+@media (max-width: 768px) {
+    .camera_area {
+        width: 100%; /* 調整寬度適應手機和平板螢幕 */
+        padding: 10px; /* 調整 padding 值以適應螢幕尺寸 */
+        background-size: 2px 16px, 16px 2px, 2px 16px, 16px 2px; /* 調整背景線條尺寸 */
+    }
+
+    #camera {
+        width: 100%; /* 調整寬度適應手機和平板螢幕 */
+    }
+}
+
+/* 在螢幕寬度小於 820px 時的樣式調整（手機和平板） */
+@media (max-width: 820px) {
+    .camera_area {
+        width: 87%; /* 調整寬度適應手機和平板螢幕 */
+        padding: 10px; /* 調整 padding 值以適應螢幕尺寸 */
+        padding-bottom: 500px;
+        background-size: 2px 16px, 16px 2px, 2px 16px, 16px 2px; /* 調整背景線條尺寸 */
+    }
+
+    #camera {
+        width: 100%; /* 調整寬度適應手機和平板螢幕 */
+    }
+}
+
+/* 在螢幕寬度小於 768px 時的樣式調整（手機和平板） */
+@media (max-width: 768px) {
+    .camera_area {
+        width: 87%; /* 調整寬度適應手機和平板螢幕 */
+        padding: 10px; /* 調整 padding 值以適應螢幕尺寸 */
+        padding-bottom: 375px;
+        background-size: 2px 16px, 16px 2px, 2px 16px, 16px 2px; /* 調整背景線條尺寸 */
+    }
+
+    #camera {
+        width: 100%; /* 調整寬度適應手機和平板螢幕 */
+    }
+}
+
+/* 在螢幕寬度小於 912px 時的樣式調整（手機和平板） */
+@media (max-width: 912px) {
+    .camera_area {
+        width: 85%; /* 調整寬度適應手機和平板螢幕 */
+        padding: 10px; /* 調整 padding 值以適應螢幕尺寸 */
+        padding-bottom: 400px;
+        background-size: 2px 16px, 16px 2px, 2px 16px, 16px 2px; /* 調整背景線條尺寸 */
+    }
+
+    #camera {
+        width: 100%; /* 調整寬度適應手機和平板螢幕 */
+    }
+}
+
+/* 在螢幕寬度小於 540px 時的樣式調整（手機和平板） */
+@media (max-width: 540px) {
+    .camera_area {
+        width: 82%; /* 調整寬度適應手機和平板螢幕 */
+        padding: 10px; /* 調整 padding 值以適應螢幕尺寸 */
+        padding-bottom: 170px;
+        background-size: 2px 16px, 16px 2px, 2px 16px, 16px 2px; /* 調整背景線條尺寸 */
+    }
+
+    #camera {
+        width: 100%; /* 調整寬度適應手機和平板螢幕 */
+    }
 }
