@@ -1,17 +1,19 @@
 import argparse
 from fastapi import FastAPI, UploadFile, File
 from typing import List
+from fastapi import Form
 import torch
 import cv2
 import base64
 import numpy as np
+import re
 from io import BytesIO
 from PIL import Image
 import random
 from pydantic import BaseModel
 import sys
 sys.path.insert(0, 'C:/Users/user/Desktop/中山醫醫資/大三下/實習/112_intern/AI_Inventory/DjangoProject/MyFirstDjango/MyFirstDjango')
-# 导入你的自定义模块
+
 from MyFirstDjango.models.experimental import attempt_load
 from MyFirstDjango.utils.datasets import MyLoadImages
 from MyFirstDjango.utils.general import check_img_size, non_max_suppression, apply_classifier, \
@@ -133,16 +135,25 @@ class ImageData(BaseModel):
     image_data: str
 
 @app.post("/detect/")
-async def detect_objects(files: List[UploadFile], image_data: ImageData):  # 使用 ImageData 类型
+async def detect_objects(
+    image_data: str = Form(None),  # Make image_data parameter optional
+    # files: List[UploadFile] = None
+):
     results = []
 
-    if image_data.image_data.startswith("data:image"):
-        # Decode the Base64 image and convert it to NumPy array
-        base64_data = re.sub('^data:image/.+;base64,', '', image_data.image_data)
+    # if files is not None:
+        # Use file upload
+        # contents = await files[0].read()
+        # Convert the file contents to Base64
+        # base64_data = base64.b64encode(contents).decode()
+        # image = cv2.imdecode(np.frombuffer(contents, np.uint8), cv2.IMREAD_COLOR)
+    if image_data is not None:
+        # Use base64-encoded image data
+        base64_data = re.sub('^data:image/.+;base64,', '', image_data)
         byte_data = base64.b64decode(base64_data)
         image = cv2.imdecode(np.frombuffer(byte_data, np.uint8), cv2.IMREAD_COLOR)
     else:
-        raise ValueError("Invalid image_data format")
+        raise ValueError("No image data provided")
 
     detector = detectapi(weights='static/07211657_best.pt', img_size=640)
     detection_results, _ = detector.detect([image])
@@ -156,18 +167,28 @@ async def detect_objects(files: List[UploadFile], image_data: ImageData):  # 使
             elif cls == 1:  # Ampoule
                 ampoule_count += 1
 
+    # Draw bounding boxes on the image
+    for _, result_txt in detection_results:
+        for cls, xyxy, conf in result_txt:
+            xyxy = [int(coord) for coord in xyxy]
+            label = f'{detector.names[cls]} {conf:.2f}'
+            color = detector.colors[cls]
+            plot_one_box(xyxy, image, label=label, color=color, line_thickness=3)
+
+    # Encode the image with drawn bounding boxes to Base64
+    _, img_encoded = cv2.imencode('.jpg', image)
+    img_base64 = base64.b64encode(img_encoded).decode()
+
     result = {
         "vial_count": vial_count,
         "ampoule_count": ampoule_count,
         "total_count": vial_count + ampoule_count,
+        "result_image_base64": img_base64  # Include the Base64-encoded image with bounding boxes in the result
     }
     results.append(result)
 
     return results
 
-
-# 原来的命令行参数解析改为 FastAPI 的方式
-# 这里你可能需要根据需要调整参数的默认值或者将一些参数设置为可选
 class FastAPIOptions:
     def __init__(self, weights='static/07211657_best.pt',
                  img_size=640, conf_thres=0.25,
@@ -187,13 +208,40 @@ class FastAPIOptions:
         self.update = update
         self.exist_ok = exist_ok
 
-opt = FastAPIOptions()  # 创建 FastAPIOptions 对象，根据需要设置参数的值
+opt = FastAPIOptions()  # 根據需要設置參數值
 
 if __name__ == '__main__':
     print("Starting FastAPI server...")
 
-# uvicorn app:app --reload
-# uvicorn main:app --reload
+# 執行指令uvicorn app:app --reload
+
+# FastAPI
+# -->conda activate yolov7
+# -->cd C:\Users\user\Desktop\中山醫醫資\大三下\實習\112_intern\AI_Inventory\DjangoProject\MyFirstDjango
+# -->uvicorn app:app --reload
+
+# 使用fastAPI介面
+# http://localhost:8000/docs
+# 輸入image的base64字串
+# 點選excute
+# 輸出 vial_count、ampoule_count、total_count、result_image_base64
+
+# 使用postman
+# post
+# http://localhost:8000/detect
+# body選x-www-form-urlencoded
+# key:image_data
+# value:(圖片的base64字串)
+# 點選sand即可
+# 輸出 vial_count、ampoule_count、total_count、result_image_base64
+
+# MangoDB
+# -->conda activate yolov7
+# -->cd C:\Users\user\Desktop\中山醫醫資\大三下\實習\112_intern\AI_Inventory\DjangoProject\MyFirstDjango
+# -->python manage.py runserver
+# http://localhost:8000/Index
+# 進入後即可操作上傳圖片和選擇照片
+
 
 
 
