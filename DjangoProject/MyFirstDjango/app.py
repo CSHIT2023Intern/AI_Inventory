@@ -220,7 +220,7 @@ if __name__ == '__main__':
 # -->cd C:\Users\user\Desktop\中山醫醫資\大三下\實習\112_intern\AI_Inventory\DjangoProject\MyFirstDjango
 # -->uvicorn app:app --reload
 
-# 使用fastAPI介面
+# 使用fastAPI--swagger UI
 # http://localhost:8000/docs
 # 輸入image的base64字串
 # 點選excute
